@@ -1,4 +1,7 @@
-﻿namespace CodinGame
+﻿using System.Text;
+using System.Text.RegularExpressions;
+
+namespace CodinGame
 {
 	internal static class Easy
 	{
@@ -155,7 +158,7 @@
 
 		public static bool Temperatures()
 		{
-			if (int.Parse(Console.ReadLine()) != 0) // the number of temperatures to analyse
+			if (int.Parse(Console.ReadLine()) != 0) // the number of temperatures to analyze
 			{
 				int[] inputs = Console.ReadLine().Split(' ').Select(int.Parse).ToArray();
 				int min = inputs.Min(Math.Abs);
@@ -168,7 +171,7 @@
 			return true;
 
 			#region first version
-			//int numberOfTemperatures = int.Parse(Console.ReadLine()); // the number of temperatures to analyse
+			//int numberOfTemperatures = int.Parse(Console.ReadLine()); // the number of temperatures to analyze
 			//int closestToZero = 0;
 			//string[] inputs = Console.ReadLine().Split(' ');
 			//for (int i = 0; i < numberOfTemperatures; i++)
@@ -197,7 +200,7 @@
 
 			#region second version
 			//int closestToZero = 0;
-			//if (int.Parse(Console.ReadLine()) != 0) // the number of temperatures to analyse
+			//if (int.Parse(Console.ReadLine()) != 0) // the number of temperatures to analyze
 			//{
 			//	int[] inputs = Console.ReadLine().Split(' ').Select(int.Parse).ToArray();
 			//	for (int i = 0; i < inputs.Length; i++)
@@ -328,6 +331,73 @@
 
 		public static bool Unary()
 		{
+			var message = Console.ReadLine()
+						.Select(x => Convert.ToString(x, 2))
+						.Aggregate((x, y) => x + y);
+
+			int count = 0;
+			StringBuilder result = new StringBuilder();
+
+			for (int i = 0; i < message.Length; i++)
+			{
+				char actualChar = message[i];
+				count++;
+
+				if (i + 1 < message.Length && actualChar == message[i + 1])
+					continue;
+
+				result.Append(actualChar == '1' ? "0 " : "00 ");
+
+				while (count > 0)
+				{
+					result.Append("0");
+					count--;
+				}
+				result.Append(" ");
+			}
+			Console.WriteLine(result.ToString().TrimEnd());
+
+			#region version with Queue
+			//string message = Console.ReadLine();
+			//string binary = string.Empty;
+			//for (int i = 0; i < message.Length; i++)
+			//{
+			//	binary += message[i] > 'A' ? Convert.ToString(message[i], 2) : "0" + Convert.ToString(message[i], 2);
+			//}
+			//Queue<char> binaryFull = new Queue<char>();
+			//for (int i = 0; i < binary.Length; i++)
+			//{
+			//	binaryFull.Enqueue(binary[i]);
+			//}
+			//int count = 0;
+			//string result = string.Empty;
+			//while (binaryFull.Count > 0)
+			//{
+			//	char actualChar = binaryFull.Dequeue();
+			//	count++;
+			//	if (binaryFull.Count > 0 && actualChar == binaryFull.Peek())
+			//		continue;
+			//	result += actualChar == '1' ? "0 " : "00 ";
+			//	while (count > 0)
+			//	{
+			//		result += "0";
+			//		count--;
+			//	}
+			//	result += " ";
+			//}
+			//Console.WriteLine(result.Trim());
+			//Console.ReadLine();
+			#endregion
+
+			#region version with Regex
+			//string MESSAGE = Console.ReadLine();
+			//string encode = MESSAGE.Select(x => (int)x)
+			//	.Select(x => Convert.ToString(x, 2).PadLeft(7, '0'))
+			//	.Aggregate((x, y) => x + y);
+			//encode = Regex.Replace(encode, @"(0+)", "00 $1 ");
+			//encode = Regex.Replace(encode, @"(1+)", "0 $1 ").Replace("1", "0");
+			//Console.WriteLine(encode.TrimEnd());
+			#endregion
 
 			return true;
 		}
