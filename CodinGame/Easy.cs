@@ -2,9 +2,9 @@
 
 namespace CodinGame;
 
-internal static class Easy
+public static class Easy
 {
-	public static bool MIME_Type()
+	public static void MIME_Type()
 	{
 		int N = int.Parse(Console.ReadLine()); // Number of elements which make up the association table.
 		int Q = int.Parse(Console.ReadLine()); // Number Q of file names to be analyzed.
@@ -18,7 +18,6 @@ internal static class Easy
 		{
 			Console.WriteLine(fileExtensions.GetValueOrDefault(Path.GetExtension(Console.ReadLine().ToLower())) ?? "UNKNOWN");
 		}
-		return true;
 
 		#region First version
 		//int N = int.Parse(Console.ReadLine()); // Number of elements which make up the association table.
@@ -170,7 +169,7 @@ internal static class Easy
 		#endregion version with List<string>
 	}
 
-	public static bool Temperatures()
+	public static void Temperatures()
 	{
 		if (int.Parse(Console.ReadLine()) != 0) // the number of temperatures to analyze
 		{
@@ -182,7 +181,6 @@ internal static class Easy
 		{
 			Console.WriteLine(0);
 		}
-		return true;
 
 		#region first version
 		//int numberOfTemperatures = int.Parse(Console.ReadLine()); // the number of temperatures to analyze
@@ -249,7 +247,7 @@ internal static class Easy
 		#endregion using Aggregate
 	}
 
-	public static bool The_Descent()
+	public static void The_Descent()
 	{
 		int[] collection = new int[8];
 		while (true)
@@ -275,7 +273,7 @@ internal static class Easy
 		#endregion version with List<>
 	}
 
-	public static bool Mars_Lander_Episode_1()
+	public static void Mars_Lander_Episode_1()
 	{
 		int[] inputs;
 		int surfaceN = int.Parse(Console.ReadLine()); // the number of points used to draw the surface of Mars.
@@ -308,10 +306,9 @@ internal static class Easy
 			}
 			Console.WriteLine($"0 {power}");
 		}
-		return true;
 	}
 
-	public static bool ASCII_Art()
+	public static void ASCII_Art()
 	{
 		int width = int.Parse(Console.ReadLine());
 		int height = int.Parse(Console.ReadLine());
@@ -338,10 +335,9 @@ internal static class Easy
 			}
 			Console.WriteLine();
 		}
-		return true;
 	}
 
-	public static bool Unary()
+	public static void Unary()
 	{
 		string message = string.Empty;
 		foreach (char c in Console.ReadLine())
@@ -409,11 +405,9 @@ internal static class Easy
 		//encode = Regex.Replace(encode, @"(1+)", "0 $1 ").Replace("1", "0");
 		//Console.WriteLine(encode.TrimEnd());
 		#endregion version with Regex
-
-		return true;
 	}
 
-	public static bool Lumen()
+	public static void Lumen()
 	{
 		int size = int.Parse(Console.ReadLine());
 		int light = int.Parse(Console.ReadLine());
@@ -444,6 +438,5 @@ internal static class Easy
 			}
 		}
 		Console.WriteLine(sum);
-		return true;
 	}
 }

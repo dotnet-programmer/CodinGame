@@ -1,6 +1,6 @@
 ﻿namespace CodinGame;
 
-internal static class VeryHard
+public static class VeryHard
 {
 
 }

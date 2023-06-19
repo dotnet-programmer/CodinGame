@@ -1,79 +1,95 @@
 ﻿using CodinGame;
+using System.Reflection;
 
-Console.WriteLine("1. Easy");
-Console.WriteLine("2. Medium");
-Console.WriteLine("3. Hard");
-Console.WriteLine("4. Very Hard");
-Console.Write("Wybierz poziom: ");
-int mainMenuNumber = int.Parse(Console.ReadLine());
+Console.ForegroundColor = ConsoleColor.Green;
 
-Console.WriteLine("\nLista rozwiązanych problemów: ");
-bool result = mainMenuNumber switch
+Action[] _easy = typeof(Easy).GetMethods(BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly | BindingFlags.Instance)
+	.Select(x => x.CreateDelegate<Action>())
+	.ToArray();
+
+Action[] _medium = typeof(Medium).GetMethods(BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly | BindingFlags.Instance)
+	.Select(x => x.CreateDelegate<Action>())
+	.ToArray();
+
+Action[] _hard = typeof(Hard).GetMethods(BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly | BindingFlags.Instance)
+	.Select(x => x.CreateDelegate<Action>())
+	.ToArray();
+
+Action[] _veryHard = typeof(VeryHard).GetMethods(BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly | BindingFlags.Instance)
+	.Select(x => x.CreateDelegate<Action>())
+	.ToArray();
+
+string[] menuItems = new[] { "Easy", "Medium", "Hard", "Very Hard" };
+
+while (true)
 {
-	1 => EasyProblems(),
-	2 => MediumProblems(),
-	3 => HardProblems(),
-	4 => VeryHardProblems(),
-	_ => false
-};
-
-bool EasyProblems()
-{
-	Console.WriteLine("1. MIME Type");
-	Console.WriteLine("2. Temperatures");
-	Console.WriteLine("3. The Descent");
-	Console.WriteLine("4. Mars_Lander_Episode_1");
-	Console.WriteLine("5. ASCII Art");
-	Console.WriteLine("6. Unary");
-	Console.WriteLine("7. Lumen");
-	Console.Write("Wybierz numer zadania: ");
-	int menuNumber = int.Parse(Console.ReadLine());
-	_ = menuNumber switch
+	ShowMenuPositions(menuItems);
+	Console.Write("Choose a number: ");
+	char keyChar = Console.ReadKey(true).KeyChar;
+	switch (keyChar)
 	{
-		1 => Easy.MIME_Type(),
-		2 => Easy.Temperatures(),
-		3 => Easy.The_Descent(),
-		4 => Easy.Mars_Lander_Episode_1(),
-		5 => Easy.ASCII_Art(),
-		6 => Easy.Unary(),
-		7 => Easy.Lumen(),
-		_ => false,
-	};
-	return true;
+		case '1':
+			DoWork(_easy);
+			break;
+		case '2':
+			DoWork(_medium);
+			break;
+		case '3':
+			DoWork(_hard);
+			break;
+		case '4':
+			DoWork(_veryHard);
+			break;
+		default:
+			return;
+	}
 }
 
-bool MediumProblems()
+static void ShowMenuPositions(string[] menuItems)
 {
-	Console.WriteLine("1. ");
-	Console.Write("Wybierz numer zadania: ");
-	int menuNumber = int.Parse(Console.ReadLine());
-	_ = menuNumber switch
+	Console.Clear();
+	for (int i = 0; i < menuItems.Length; i++)
 	{
-		_ => false,
-	};
-	return true;
+		Console.WriteLine($"{i + 1}. {menuItems[i]}");
+	}
 }
 
-bool HardProblems()
+static void DoWork(Action[] functions, string header = "")
 {
-	Console.WriteLine("1. ");
-	Console.Write("Wybierz numer zadania: ");
-	int menuNumber = int.Parse(Console.ReadLine());
-	_ = menuNumber switch
+	bool isWorking = true;
+	while (isWorking)
 	{
-		_ => false,
-	};
-	return true;
-}
+		ShowMenuPositions(functions, header);
+		Console.Write("Choose a number: ");
+		isWorking = ExecuteMethod(Console.ReadLine(), functions);
+	}
 
-bool VeryHardProblems()
-{
-	Console.WriteLine("1. ");
-	Console.Write("Wybierz numer zadania: ");
-	int menuNumber = int.Parse(Console.ReadLine());
-	_ = menuNumber switch
+	static void ShowMenuPositions(Action[] functions, string header)
 	{
-		_ => false,
-	};
-	return true;
+		Console.Clear();
+
+		if (!string.IsNullOrEmpty(header))
+		{
+			Console.WriteLine(header);
+		}
+
+		for (int i = 0; i < functions.Length; i++)
+		{
+			Console.WriteLine($"{i + 1}. {functions[i].Method.Name}");
+		}
+	}
+
+	static bool ExecuteMethod(string input, Action[] functions)
+	{
+		if (int.TryParse(input, out int menuNumber) && menuNumber > 0 && menuNumber <= functions.Length)
+		{
+			functions[menuNumber - 1]();
+			Console.ReadLine();
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 }
