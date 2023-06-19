@@ -1,7 +1,6 @@
-﻿namespace CodinGame
-{
-	internal static class Hard
-	{
+﻿namespace CodinGame;
 
-	}
+internal static class Hard
+{
+
 }

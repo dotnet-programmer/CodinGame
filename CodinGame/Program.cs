@@ -25,6 +25,7 @@ bool EasyProblems()
 	Console.WriteLine("4. Mars_Lander_Episode_1");
 	Console.WriteLine("5. ASCII Art");
 	Console.WriteLine("6. Unary");
+	Console.WriteLine("7. Lumen");
 	Console.Write("Wybierz numer zadania: ");
 	int menuNumber = int.Parse(Console.ReadLine());
 	_ = menuNumber switch
@@ -35,6 +36,7 @@ bool EasyProblems()
 		4 => Easy.Mars_Lander_Episode_1(),
 		5 => Easy.ASCII_Art(),
 		6 => Easy.Unary(),
+		7 => Easy.Lumen(),
 		_ => false,
 	};
 	return true;

@@ -1,7 +1,6 @@
-﻿namespace CodinGame
-{
-	internal static class Medium
-	{
+﻿namespace CodinGame;
 
-	}
+internal static class Medium
+{
+
 }
