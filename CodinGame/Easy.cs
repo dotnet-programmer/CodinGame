@@ -439,4 +439,414 @@ public static class Easy
 		}
 		Console.WriteLine(sum);
 	}
+
+	public static void Sudoku_Validator()
+	{
+		List<string>[] bigGrid = new List<string>[9];
+		List<string>[] smallGrids = new List<string>[9];
+		for (int i = 0; i < 9; i++)
+		{
+			bigGrid[i] = Console.ReadLine().Split(' ').ToList();
+			smallGrids[i] = new List<string>(9);
+		}
+		//make smallGrids
+		int skip = 0;
+		for (int i = 0; i < 9; i++)
+		{
+			if (i > 0 && i % 3 == 0)
+			{
+				skip += 3;
+			}
+			for (int j = 0; j < 3; j++)
+			{
+				smallGrids[i].AddRange(bigGrid[i % 3 * 3 + j].GetRange(skip, 3));
+			}
+		}
+		// check values
+		for (int i = 0; i < 9; i++)
+		{
+			if (!IsProperValue(bigGrid[i]) || !IsProperValue(bigGrid.Select(x => x[i]).ToList()) || !IsProperValue(smallGrids[i]))
+			{
+				Console.WriteLine("false");
+				return;
+			}
+		}
+		Console.WriteLine("true");
+		static bool IsProperValue(List<string> collection) => collection.Distinct().Count() == 9;
+
+		#region version with 2 lists
+		//List<string> numbers = new();
+		//List<string> nines = new(9);
+		//// rows
+		//for (int i = 0; i < 9; i++)
+		//{
+		//	nines.Clear();
+		//	nines.AddRange(Console.ReadLine().Split(' '));
+		//	if (!CheckNumbers(nines))
+		//	{
+		//		return;
+		//	}
+		//	numbers.AddRange(nines);
+		//}
+		//// columns
+		//for (int i = 0; i < 9; i++)
+		//{
+		//	nines.Clear();
+		//	for (int j = i; j < 81; j += 9)
+		//	{
+		//		nines.Add(numbers.ElementAt(j));
+		//	}
+		//	if (!CheckNumbers(nines))
+		//	{
+		//		return;
+		//	}
+		//}
+		//// squares
+		//for (int i = 0; i < 81; i += 27)
+		//{
+		//	for (int j = i; j < i + 9; j += 3)
+		//	{
+		//		nines.Clear();
+		//		for (int k = j; k < j + 3; k++)
+		//		{
+		//			nines.Add(numbers.ElementAt(k));
+		//			nines.Add(numbers.ElementAt(k + 9));
+		//			nines.Add(numbers.ElementAt(k + 18));
+		//		}
+		//		if (!CheckNumbers(nines))
+		//		{
+		//			return;
+		//		}
+		//	}
+		//}
+		//Console.WriteLine("true");
+		//static bool CheckNumbers(List<string> collection)
+		//{
+		//	if (collection.Distinct().Count() != 9)
+		//	{
+		//		Console.WriteLine("false");
+		//		return false;
+		//	}
+		//	return true;
+		//}
+		#endregion version with 2 lists
+
+		#region first version with 2 dimensional array
+		//string[,] numbers = new string[9, 9];
+		//// rows
+		//for (int i = 0; i < 9; i++)
+		//{
+		//	string[] inputs = Console.ReadLine().Split(' ');
+		//	if (!IsProperValue(inputs))
+		//	{
+		//		Console.WriteLine("false");
+		//		return;
+		//	}
+		//	for (int j = 0; j < 9; j++)
+		//	{
+		//		numbers[i, j] = inputs[j];
+		//	}
+		//}
+		//// columns
+		//string[] column = new string[9];
+		//for (int i = 0; i < numbers.GetLength(0); i++)
+		//{
+		//	for (int j = 0; j < numbers.GetLength(1); j++)
+		//	{
+		//		column[j] = numbers[j, i];
+		//	}
+		//	if (!IsProperValue(column))
+		//	{
+		//		Console.WriteLine("false");
+		//		return;
+		//	}
+		//}
+		//// small squares
+		//List<string> squares = new(9);
+		//for (int i = 0; i < 9; i += 3)
+		//{
+		//	for (int j = 0; j < 9; j += 3)
+		//	{
+		//		squares.Clear();
+		//		for (int k = i; k < i + 3; k++)
+		//		{
+		//			for (int m = j; m < j + 3; m++)
+		//			{
+		//				squares.Add(numbers[k, m]);
+		//			}
+		//		}
+		//		if (!IsProperValue(squares))
+		//		{
+		//			Console.WriteLine("false");
+		//			return;
+		//		}
+		//	}
+		//}
+		//Console.WriteLine("true");
+		//private static bool IsProperValue(string[] collection) => collection.Distinct().Count() == 9;
+		//private static bool IsProperValue(List<string> collection) => collection.Distinct().Count() == 9;
+		#endregion first version with 2 dimensional array
+	}
+
+	public static void HORSE_RACING_DUALS()
+	{
+		int numberOfHorses = int.Parse(Console.ReadLine());
+		List<int> horses = new(numberOfHorses);
+		for (int i = 0; i < numberOfHorses; i++)
+		{
+			horses.Add(int.Parse(Console.ReadLine()));
+		}
+		horses.Sort();
+		horses.Reverse();
+		int min = horses[0];
+		for (int i = 0; i < horses.Count - 1; i++)
+		{
+			if (horses[i] - horses[i + 1] < min)
+			{
+				min = horses[i] - horses[i + 1];
+			}
+		}
+		Console.WriteLine(min);
+	}
+
+	public static void Power_of_Thor_Episode_1()
+	{
+		int[] inputs = Console.ReadLine().Split(' ').Select(int.Parse).ToArray();
+		int lightX = inputs[0]; // the X position of the light of power
+		int lightY = inputs[1]; // the Y position of the light of power
+		int initialTx = inputs[2]; // Thor's starting X position
+		int initialTy = inputs[3]; // Thor's starting Y position
+
+		while (true)
+		{
+			_ = int.Parse(Console.ReadLine()); // The remaining amount of turns
+			string dir_X = "", dir_Y = "";
+
+			if (initialTy < lightY)
+			{
+				initialTy++;
+				dir_Y = "S";
+			}
+			else if (initialTy > lightY)
+			{
+				initialTy--;
+				dir_Y = "N";
+			}
+
+			if (initialTx < lightX)
+			{
+				initialTx++;
+				dir_X = "E";
+			}
+			else if (initialTx > lightX)
+			{
+				initialTx--;
+				dir_X = "W";
+			}
+
+			Console.WriteLine(dir_Y + dir_X);
+		}
+	}
+
+	public static void Defibrillators()
+	{
+		double userLongitude = double.Parse(Console.ReadLine().Replace(',', '.'));
+		double userLatitude = double.Parse(Console.ReadLine().Replace(',', '.'));
+		int numberOfDefibrillators = int.Parse(Console.ReadLine());
+		double minValue = 0;
+		string minName = string.Empty;
+		for (int i = 0; i < numberOfDefibrillators; i++)
+		{
+			string[] defibrillator = Console.ReadLine().Split(';');
+			string id = defibrillator[0];
+			string name = defibrillator[1];
+			string address = defibrillator[2];
+			string phone = defibrillator[3];
+			double defLongitude = double.Parse(defibrillator[4].Replace(',', '.'));
+			double defLatitude = double.Parse(defibrillator[5].Replace(',', '.'));
+
+			double x = (defLongitude - userLongitude) * Math.Cos((userLongitude + defLongitude) / 2);
+			double y = defLatitude - userLatitude;
+			double d = Math.Sqrt(x * x + y * y) * 6371;
+
+			if (i == 0 || d < minValue)
+			{
+				minValue = d;
+				minName = name;
+			}
+		}
+		Console.WriteLine(minName);
+
+		#region Another solution using using Defibrillator and AllDefibrillators class
+		//class Solution
+		//{
+		//	static void Main(string[] args)
+		//	{
+		//		double userLon = double.Parse(Console.ReadLine().Replace(',', '.')); // degrees
+		//		double userLat = double.Parse(Console.ReadLine().Replace(',', '.')); // degrees
+		//		int n = int.Parse(Console.ReadLine()); // number of defibrillators
+		//		AllDefibrillators allDefibrillators = new AllDefibrillators();
+		//		for (int i = 0; i < n; i++)
+		//		{
+		//			allDefibrillators.Add(new Defibrillator(Console.ReadLine()));
+		//		}
+		//		string nearestDef = allDefibrillators.FindNearestDef(userLon, userLat);
+		//		Console.WriteLine(nearestDef);
+		//	}
+		//}
+		//class Defibrillator
+		//{
+		//	private string id;
+		//	private string address;
+		//	private string phone;
+		//	public string Name { get; }
+		//	public double DefLong { get; }
+		//	public double DefLat { get; }
+		//	public Defibrillator(string text)
+		//	{
+		//		string[] defibrillator = text.Split(';');
+		//		id = defibrillator[0];
+		//		Name = defibrillator[1];
+		//		address = defibrillator[2];
+		//		phone = defibrillator[3];
+		//		DefLong = double.Parse(defibrillator[4].Replace(',', '.'));
+		//		DefLat = double.Parse(defibrillator[5].Replace(',', '.'));
+		//	}
+		//}
+		//class AllDefibrillators
+		//{
+		//	private List<Defibrillator> allDefibrillators;
+		//	public AllDefibrillators() => allDefibrillators = new List<Defibrillator>();
+		//	public void Add(Defibrillator defibrillator) => allDefibrillators.Add(defibrillator);
+		//	public string FindNearestDef(double userLongtitude, double userLatitude)
+		//	{
+		//		double minValue = 0;
+		//		string minName = string.Empty;
+		//		for (int i = 0; i < allDefibrillators.Count; i++)
+		//		{
+		//			double x = (allDefibrillators[i].DefLong - userLongtitude) * Math.Cos((userLongtitude + allDefibrillators[i].DefLong) / 2);
+		//			double y = allDefibrillators[i].DefLat - userLatitude;
+		//			double d = Math.Sqrt(x * x + y * y) * 6371;
+		//			if (i == 0 || d < minValue)
+		//			{
+		//				minValue = d;
+		//				minName = allDefibrillators[i].Name;
+		//			}
+		//		}
+		//		return minName;
+		//	}
+		//}
+		#endregion Another solution using using Defibrillator and AllDefibrillators class
+	}
+
+	public static void Sum_of_Spirals_Diagonals()
+	{
+		int numberOfLayers = int.Parse(Console.ReadLine());
+		long sum = 1;
+		long number = 1;
+		for (int i = numberOfLayers - 1; i > 0; i -= 2)
+		{
+			int iteration = (numberOfLayers % 2 == 0 && i == 1) ? 3 : 4;
+			for (int j = 0; j < iteration; j++)
+			{
+				number += i;
+				sum += number;
+			}
+		}
+		Console.WriteLine(sum);
+
+		#region first version
+		//int n = int.Parse(Console.ReadLine());
+		//long suma = 1;
+		//long liczba = 1;
+		//for (int i = n - 1; i > 0; i -= 2)
+		//{
+		//	for (int j = 0; j < 4; j++)
+		//	{
+		//		liczba += i;
+		//		suma += liczba;
+		//	}
+		//}
+		//if (n % 2 == 0)
+		//{
+		//	suma -= (n * n + 1);
+		//}
+		//Console.WriteLine(suma);
+		#endregion first version
+	}
+
+	public static void Rock_Paper_Scissors_Lizard_Spock()
+	{
+		int n = int.Parse(Console.ReadLine());
+		Game game = new();
+		for (int i = 0; i < n; i++)
+		{
+			game.Add(new Player(Console.ReadLine()));
+		}
+		Player winner = game.PlayGame();
+		Console.WriteLine($"{winner.Number}\n{winner.GetDefeatedEnemy()}");
+	}
+
+	private class Player
+	{
+		private readonly List<int> previousEnemies;
+		public int Number { get; }
+		public string Sign { get; }
+		public Player(string text)
+		{
+			previousEnemies = new List<int>();
+			string[] inputs = text.Split(' ');
+			Number = int.Parse(inputs[0]);
+			Sign = inputs[1];
+		}
+		public void AddDefeatedEnemy(int number) => previousEnemies.Add(number);
+		public string GetDefeatedEnemy() => string.Join(" ", previousEnemies);
+	}
+	private class Game
+	{
+		private readonly Queue<Player> players;
+		public Game() => players = new Queue<Player>();
+		public void Add(Player player) => players.Enqueue(player);
+		public Player PlayGame()
+		{
+			while (players.Count > 1)
+			{
+				Player winner = players.Dequeue();
+				Player loser = players.Dequeue();
+				Player player = CheckWinner(winner, loser);
+				if (player.Equals(loser))
+				{
+					(winner, loser) = (loser, winner);
+				}
+				winner.AddDefeatedEnemy(loser.Number);
+				players.Enqueue(winner);
+			}
+			return players.Dequeue();
+		}
+		private Player CheckWinner(Player player1, Player player2)
+		{
+			string sign1 = player1.Sign;
+			string sign2 = player2.Sign;
+			if ((sign1 == "C" && (sign2 == "P" || sign2 == "L"))
+					|| (sign1 == "P" && (sign2 == "R" || sign2 == "S"))
+					|| (sign1 == "R" && (sign2 == "L" || sign2 == "C"))
+					|| (sign1 == "L" && (sign2 == "S" || sign2 == "P"))
+					|| (sign1 == "S" && (sign2 == "C" || sign2 == "R")))
+			{
+				return player1;
+			}
+			else if ((sign2 == "C" && (sign1 == "P" || sign1 == "L"))
+				|| (sign2 == "P" && (sign1 == "R" || sign1 == "S"))
+				|| (sign2 == "R" && (sign1 == "L" || sign1 == "C"))
+				|| (sign2 == "L" && (sign1 == "S" || sign1 == "P"))
+				|| (sign2 == "S" && (sign1 == "C" || sign1 == "R")))
+			{
+				return player2;
+			}
+			else
+			{
+				return player1.Number < player2.Number ? player1 : player2;
+			}
+		}
+	}
 }
