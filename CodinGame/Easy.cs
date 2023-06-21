@@ -4,6 +4,7 @@ namespace CodinGame;
 
 public static class Easy
 {
+	// https://www.codingame.com/training/easy/mime-type
 	public static void MIME_Type()
 	{
 		int N = int.Parse(Console.ReadLine()); // Number of elements which make up the association table.
@@ -169,6 +170,7 @@ public static class Easy
 		#endregion version with List<string>
 	}
 
+	// https://www.codingame.com/training/easy/temperatures
 	public static void Temperatures()
 	{
 		if (int.Parse(Console.ReadLine()) != 0) // the number of temperatures to analyze
@@ -247,6 +249,7 @@ public static class Easy
 		#endregion using Aggregate
 	}
 
+	// https://www.codingame.com/training/easy/the-descent
 	public static void The_Descent()
 	{
 		int[] collection = new int[8];
@@ -273,6 +276,7 @@ public static class Easy
 		#endregion version with List<>
 	}
 
+	// https://www.codingame.com/training/easy/mars-lander-episode-1
 	public static void Mars_Lander_Episode_1()
 	{
 		int[] inputs;
@@ -308,6 +312,7 @@ public static class Easy
 		}
 	}
 
+	// https://www.codingame.com/training/easy/ascii-art
 	public static void ASCII_Art()
 	{
 		int width = int.Parse(Console.ReadLine());
@@ -337,6 +342,7 @@ public static class Easy
 		}
 	}
 
+	// https://www.codingame.com/training/easy/unary
 	public static void Unary()
 	{
 		string message = string.Empty;
@@ -407,6 +413,7 @@ public static class Easy
 		#endregion version with Regex
 	}
 
+	// https://www.codingame.com/training/easy/lumen
 	public static void Lumen()
 	{
 		int size = int.Parse(Console.ReadLine());
@@ -440,6 +447,7 @@ public static class Easy
 		Console.WriteLine(sum);
 	}
 
+	// https://www.codingame.com/training/easy/sudoku-validator
 	public static void Sudoku_Validator()
 	{
 		List<string>[] bigGrid = new List<string>[9];
@@ -588,6 +596,7 @@ public static class Easy
 		#endregion first version with 2 dimensional array
 	}
 
+	// https://www.codingame.com/training/easy/horse-racing-duals
 	public static void HORSE_RACING_DUALS()
 	{
 		int numberOfHorses = int.Parse(Console.ReadLine());
@@ -609,6 +618,7 @@ public static class Easy
 		Console.WriteLine(min);
 	}
 
+	// https://www.codingame.com/training/easy/power-of-thor-episode-1
 	public static void Power_of_Thor_Episode_1()
 	{
 		int[] inputs = Console.ReadLine().Split(' ').Select(int.Parse).ToArray();
@@ -648,6 +658,7 @@ public static class Easy
 		}
 	}
 
+	// https://www.codingame.com/training/easy/defibrillators
 	public static void Defibrillators()
 	{
 		double userLongitude = double.Parse(Console.ReadLine().Replace(',', '.'));
@@ -739,6 +750,7 @@ public static class Easy
 		#endregion Another solution using using Defibrillator and AllDefibrillators class
 	}
 
+	// https://www.codingame.com/training/easy/sum-of-spirals-diagonals
 	public static void Sum_of_Spirals_Diagonals()
 	{
 		int numberOfLayers = int.Parse(Console.ReadLine());
@@ -775,6 +787,7 @@ public static class Easy
 		#endregion first version
 	}
 
+	// https://www.codingame.com/training/easy/rock-paper-scissors-lizard-spock
 	public static void Rock_Paper_Scissors_Lizard_Spock()
 	{
 		int n = int.Parse(Console.ReadLine());
