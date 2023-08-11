@@ -805,6 +805,7 @@ public static class Easy
 		private readonly List<int> previousEnemies;
 		public int Number { get; }
 		public string Sign { get; }
+
 		public Player(string text)
 		{
 			previousEnemies = new List<int>();
@@ -812,14 +813,20 @@ public static class Easy
 			Number = int.Parse(inputs[0]);
 			Sign = inputs[1];
 		}
+
 		public void AddDefeatedEnemy(int number) => previousEnemies.Add(number);
+
 		public string GetDefeatedEnemy() => string.Join(" ", previousEnemies);
 	}
+
 	private class Game
 	{
 		private readonly Queue<Player> players;
+
 		public Game() => players = new Queue<Player>();
+
 		public void Add(Player player) => players.Enqueue(player);
+
 		public Player PlayGame()
 		{
 			while (players.Count > 1)
@@ -836,6 +843,7 @@ public static class Easy
 			}
 			return players.Dequeue();
 		}
+
 		private Player CheckWinner(Player player1, Player player2)
 		{
 			string sign1 = player1.Sign;
@@ -861,5 +869,27 @@ public static class Easy
 				return player1.Number < player2.Number ? player1 : player2;
 			}
 		}
+	}
+
+	// https://www.codingame.com/training/easy/snail-run
+	public static void SNAIL_RUN()
+	{
+		Dictionary<int, int> snails = new();
+		int numberOfSnails = int.Parse(Console.ReadLine());
+		for (int i = 1; i <= numberOfSnails; i++)
+		{
+			snails[i] = int.Parse(Console.ReadLine());
+		}
+		int mapHeight = int.Parse(Console.ReadLine());
+		int mapWidth = int.Parse(Console.ReadLine());
+		for (int i = 0; i < mapHeight; i++)
+		{
+			string ROW = Console.ReadLine();
+		}
+
+		// Write an answer using Console.WriteLine()
+		// To debug: Console.Error.WriteLine("Debug messages...");
+
+		Console.WriteLine("winner is number");
 	}
 }

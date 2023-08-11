@@ -1,5 +1,5 @@
-﻿using CodinGame;
-using System.Reflection;
+﻿using System.Reflection;
+using CodinGame;
 
 Console.ForegroundColor = ConsoleColor.Green;
 
