@@ -9,7 +9,7 @@ public static class Easy
 	{
 		int N = int.Parse(Console.ReadLine()); // Number of elements which make up the association table.
 		int Q = int.Parse(Console.ReadLine()); // Number Q of file names to be analyzed.
-		Dictionary<string, string> fileExtensions = new();
+		Dictionary<string, string> fileExtensions = [];
 		for (int i = 0; i < N; i++)
 		{
 			string[] inputs = Console.ReadLine().Split(' ');
@@ -802,46 +802,50 @@ public static class Easy
 
 	private class Player
 	{
-		private readonly List<int> previousEnemies;
+		private readonly List<int> _previousEnemies;
 		public int Number { get; }
 		public string Sign { get; }
 
 		public Player(string text)
 		{
-			previousEnemies = new List<int>();
+			_previousEnemies = [];
 			string[] inputs = text.Split(' ');
 			Number = int.Parse(inputs[0]);
 			Sign = inputs[1];
 		}
 
-		public void AddDefeatedEnemy(int number) => previousEnemies.Add(number);
+		public void AddDefeatedEnemy(int number)
+			=> _previousEnemies.Add(number);
 
-		public string GetDefeatedEnemy() => string.Join(" ", previousEnemies);
+		public string GetDefeatedEnemy()
+			=> string.Join(" ", _previousEnemies);
 	}
 
 	private class Game
 	{
-		private readonly Queue<Player> players;
+		private readonly Queue<Player> _players;
 
-		public Game() => players = new Queue<Player>();
+		public Game()
+			=> _players = new Queue<Player>();
 
-		public void Add(Player player) => players.Enqueue(player);
+		public void Add(Player player)
+			=> _players.Enqueue(player);
 
 		public Player PlayGame()
 		{
-			while (players.Count > 1)
+			while (_players.Count > 1)
 			{
-				Player winner = players.Dequeue();
-				Player loser = players.Dequeue();
+				Player winner = _players.Dequeue();
+				Player loser = _players.Dequeue();
 				Player player = CheckWinner(winner, loser);
 				if (player.Equals(loser))
 				{
 					(winner, loser) = (loser, winner);
 				}
 				winner.AddDefeatedEnemy(loser.Number);
-				players.Enqueue(winner);
+				_players.Enqueue(winner);
 			}
-			return players.Dequeue();
+			return _players.Dequeue();
 		}
 
 		private Player CheckWinner(Player player1, Player player2)
@@ -874,7 +878,7 @@ public static class Easy
 	// https://www.codingame.com/training/easy/snail-run
 	public static void SNAIL_RUN()
 	{
-		Dictionary<int, int> snails = new();
+		Dictionary<int, int> snails = [];
 		int numberOfSnails = int.Parse(Console.ReadLine());
 		for (int i = 1; i <= numberOfSnails; i++)
 		{

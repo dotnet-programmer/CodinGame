@@ -3,23 +3,31 @@ using CodinGame;
 
 Console.ForegroundColor = ConsoleColor.Green;
 
-Action[] _easy = typeof(Easy).GetMethods(BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly | BindingFlags.Instance)
+Action[] _easy = 
+	typeof(Easy)
+	.GetMethods(BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly | BindingFlags.Instance)
 	.Select(x => x.CreateDelegate<Action>())
 	.ToArray();
 
-Action[] _medium = typeof(Medium).GetMethods(BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly | BindingFlags.Instance)
+Action[] _medium = 
+	typeof(Medium)
+	.GetMethods(BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly | BindingFlags.Instance)
 	.Select(x => x.CreateDelegate<Action>())
 	.ToArray();
 
-Action[] _hard = typeof(Hard).GetMethods(BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly | BindingFlags.Instance)
+Action[] _hard = 
+	typeof(Hard)
+	.GetMethods(BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly | BindingFlags.Instance)
 	.Select(x => x.CreateDelegate<Action>())
 	.ToArray();
 
-Action[] _veryHard = typeof(VeryHard).GetMethods(BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly | BindingFlags.Instance)
+Action[] _veryHard = 
+	typeof(VeryHard)
+	.GetMethods(BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly | BindingFlags.Instance)
 	.Select(x => x.CreateDelegate<Action>())
 	.ToArray();
 
-string[] menuItems = new[] { "Easy", "Medium", "Hard", "Very Hard" };
+string[] menuItems = ["Easy", "Medium", "Hard", "Very Hard"];
 
 while (true)
 {
