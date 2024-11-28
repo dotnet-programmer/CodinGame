@@ -3,25 +3,25 @@ using CodinGame;
 
 Console.ForegroundColor = ConsoleColor.Green;
 
-Action[] _easy = 
+Action[] _easy =
 	typeof(Easy)
 	.GetMethods(BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly | BindingFlags.Instance)
 	.Select(x => x.CreateDelegate<Action>())
 	.ToArray();
 
-Action[] _medium = 
+Action[] _medium =
 	typeof(Medium)
 	.GetMethods(BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly | BindingFlags.Instance)
 	.Select(x => x.CreateDelegate<Action>())
 	.ToArray();
 
-Action[] _hard = 
+Action[] _hard =
 	typeof(Hard)
 	.GetMethods(BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly | BindingFlags.Instance)
 	.Select(x => x.CreateDelegate<Action>())
 	.ToArray();
 
-Action[] _veryHard = 
+Action[] _veryHard =
 	typeof(VeryHard)
 	.GetMethods(BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly | BindingFlags.Instance)
 	.Select(x => x.CreateDelegate<Action>())
